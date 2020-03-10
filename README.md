@@ -1,4 +1,4 @@
-# Restaurant List CRUD
+# Expense Tracker
 Built by 
 - [Node.js](https://nodejs.org/en/)
 - [express](https://www.npmjs.com/package/express)
