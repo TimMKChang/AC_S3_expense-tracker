@@ -18,7 +18,7 @@ app.use(session({
   secret: 'restaurant list secret',
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({ url: 'mongodb://localhost/sessiondb' }),
+  store: new MongoStore({ url: process.env.MONGODB_URI || 'mongodb://localhost/sessiondb' }),
   cookie: { maxAge: 1000 * 60 }
 }))
 
