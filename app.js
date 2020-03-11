@@ -13,10 +13,13 @@ const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 
 const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 app.use(session({
   secret: 'restaurant list secret',
   resave: false,
   saveUninitialized: true,
+  store: new MongoStore({ url: 'mongodb://localhost/sessiondb' }),
+  cookie: { maxAge: 1000 * 60 }
 }))
 
 const passport = require('passport')
