@@ -16,7 +16,7 @@ Built by
 ![Project Preview](/public/image/expense-tracker_preview.PNG)
 
 #### Show all records
-![Project Preview](/public/image/expense-tracker_preview_2.PNG)
+![Project Preview](/public/image/expense-tracker_preview_3.PNG)
 
 ## Features
 - CRUD: Create, Read, Update, and Delete
