@@ -82,6 +82,27 @@ document.querySelector('#title-amount').addEventListener('click', e => {
 
 })
 
+// sort category
+
+document.querySelector('#title-category').addEventListener('click', e => {
+
+  const category = [
+    'Housing',
+    'Transportation',
+    'Entertainment',
+    'Food',
+    'Others'
+  ]
+
+  const listGroupChildrenHTML = e.target.closest('.list-group').children
+
+  for (let i = 1; i < listGroupChildrenHTML.length; i++) {
+    const index = category.indexOf(listGroupChildrenHTML[i].querySelector('.category').dataset.category)
+    listGroupChildrenHTML[i].setAttribute('style', `order: ${index};`)
+  }
+
+})
+
 // chart
 
 createPieChart()
