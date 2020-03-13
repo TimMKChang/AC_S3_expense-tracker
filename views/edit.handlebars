@@ -21,7 +21,12 @@
       <h4>Category</h4>
     </label>
     <select class="form-control mb-3" id="category" name="category">
-      {{{optionsHTML}}}
+      <option value="Housing" {{#if record.optionHousing}}selected="selected" {{/if}}>Housing</option>
+      <option value="Transportation" {{#if record.optionTransportation}}selected="selected" {{/if}}>Transportation
+      </option>
+      <option value="Entertainment" {{#if record.optionEntertainment}}selected="selected" {{/if}}>Entertainment</option>
+      <option value="Food" {{#if record.optionFood}}selected="selected" {{/if}}>Food</option>
+      <option value="Others" {{#if record.optionOthers}}selected="selected" {{/if}}>Others</option>
     </select>
 
     <label for="amount">

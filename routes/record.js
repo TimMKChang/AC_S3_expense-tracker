@@ -79,16 +79,13 @@ router.get('/:id/edit', (req, res) => {
 
       // category selected
       let options = ['Housing', 'Transportation', 'Entertainment', 'Food', 'Others']
-      let optionsHTML = ''
       options.forEach(option => {
         if (option === record.category) {
-          optionsHTML += `<option value="${option}" selected="selected">${option}</option>`
-        } else {
-          optionsHTML += `<option value="${option}">${option}</option>`
+          record[`option${option}`] = true
         }
       })
 
-      return res.render('edit', { record, optionsHTML })
+      return res.render('edit', { record })
     })
     .catch(err => {
       return console.error(err)
