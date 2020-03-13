@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../models/record')
+const hasSpecialCharacters = require('../public/javascripts/hasSpecialCharacters')
 
 // '/restaurants/*' all should be authenticated
 const { authenticated } = require('../config/auth')
@@ -54,6 +55,27 @@ router.get('/new', (req, res) => {
 })
 // create
 router.post('/', (req, res) => {
+
+  const newRecord = req.body
+  // category selected
+  let options = ['Housing', 'Transportation', 'Entertainment', 'Food', 'Others']
+  options.forEach(option => {
+    if (option === newRecord.category) {
+      newRecord[`option${option}`] = true
+    }
+  })
+  // avoid special characters
+  if (hasSpecialCharacters(newRecord.merchant) || hasSpecialCharacters(newRecord.name)) {
+    newErrorMsg = 'There are invalid characters in your input should be avoided!'
+    return res.render('new', { newRecord, newErrorMsg })
+  }
+  // check each input category date amount
+  _regex_date = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+  if (!options.includes(newRecord.category) || !_regex_date.test(newRecord.date) || isNaN(newRecord.amount)) {
+    newErrorMsg = 'There are invalid characters in your input should be avoided!'
+    return res.render('new', { newRecord, newErrorMsg })
+  }
+
   const record = new Record({
     name: req.body.name,
     category: req.body.category,
@@ -93,6 +115,27 @@ router.get('/:id/edit', (req, res) => {
 })
 // updete
 router.put('/:id', (req, res) => {
+
+  const newRecord = req.body
+  // category selected
+  let options = ['Housing', 'Transportation', 'Entertainment', 'Food', 'Others']
+  options.forEach(option => {
+    if (option === newRecord.category) {
+      newRecord[`option${option}`] = true
+    }
+  })
+  // avoid special characters
+  if (hasSpecialCharacters(newRecord.merchant) || hasSpecialCharacters(newRecord.name)) {
+    newErrorMsg = 'There are invalid characters in your input should be avoided!'
+    return res.render('new', { newRecord, newErrorMsg })
+  }
+  // check each input category date amount
+  _regex_date = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+  if (!options.includes(newRecord.category) || !_regex_date.test(newRecord.date) || isNaN(newRecord.amount)) {
+    newErrorMsg = 'There are invalid characters in your input should be avoided!'
+    return res.render('new', { newRecord, newErrorMsg })
+  }
+
   Record.findOne({ _id: req.params.id, userId: req.user._id })
     .then(record => {
       record.name = req.body.name
