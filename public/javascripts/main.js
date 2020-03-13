@@ -34,13 +34,28 @@ document.querySelector('#title-date').addEventListener('click', e => {
   iconHTML.classList.toggle('fa-arrow-up')
   iconHTML.classList.toggle('fa-arrow-down')
 
+  // get date
+  const dates = []
+  for (let i = 1; i < listGroupChildrenHTML.length; i++) {
+    dates.push(listGroupChildrenHTML[i].querySelector('.record-date').innerText)
+  }
+
+  dates.sort(function (a, b) {
+    const aDate = new Date(a.split('-')[0], a.split('-')[1], a.split('-')[2]);
+    const bDate = new Date(b.split('-')[0], b.split('-')[1], b.split('-')[2]);
+    console.log(typeof aDate.getTime())
+    return aDate.getTime() - bDate.getTime()
+  })
+
   if (iconHTML.classList.contains('fa-arrow-down')) {
     for (let i = 1; i < listGroupChildrenHTML.length; i++) {
-      listGroupChildrenHTML[i].setAttribute('style', `order: ${listGroupChildrenHTML.length - i};`)
+      const dateIndex = dates.indexOf(listGroupChildrenHTML[i].querySelector('.record-date').innerText)
+      listGroupChildrenHTML[i].setAttribute('style', `order: ${dateIndex};`)
     }
   } else if (iconHTML.classList.contains('fa-arrow-up')) {
     for (let i = 1; i < listGroupChildrenHTML.length; i++) {
-      listGroupChildrenHTML[i].setAttribute('style', `order: ${i};`)
+      const dateIndex = dates.indexOf(listGroupChildrenHTML[i].querySelector('.record-date').innerText)
+      listGroupChildrenHTML[i].setAttribute('style', `order: ${listGroupChildrenHTML.length - dateIndex};`)
     }
   }
 
@@ -66,7 +81,6 @@ document.querySelector('#title-amount').addEventListener('click', e => {
   amounts.sort(function (a, b) {
     return Number(a) - Number(b)
   })
-  console.log(amounts)
 
   if (iconHTML.classList.contains('fa-arrow-down')) {
     for (let i = 1; i < listGroupChildrenHTML.length; i++) {
