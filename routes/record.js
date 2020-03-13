@@ -26,17 +26,17 @@ router.get('/', (req, res) => {
 
       // get total amount
       let totalAmount = 0
-      const iconHTML = {
-        Housing: '<i class="fas fa-home"></i>',
-        Transportation: '<i class="fas fa-shuttle-van"></i>',
-        Entertainment: '<i class="fas fa-grin-beam"></i>',
-        Food: '<i class="fas fa-utensils"></i>',
-        Others: '<i class="fas fa-pen"></i>'
+      const iconsClass = {
+        Housing: 'fas fa-home',
+        Transportation: 'fas fa-shuttle-van',
+        Entertainment: 'fas fa-grin-beam',
+        Food: 'fas fa-utensils',
+        Others: 'fas fa-pen'
       }
 
       records.forEach(record => {
         totalAmount += record.amount
-        record.icon = iconHTML[record.category]
+        record.iconClass = iconsClass[record.category]
       })
 
       // res.locals
