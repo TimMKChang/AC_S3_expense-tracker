@@ -19,7 +19,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({ url: process.env.MONGODB_URI || 'mongodb://localhost/sessiondb' }),
-  cookie: { maxAge: 1000 * 60 }
+  cookie: { maxAge: 1000 * 60 * 60 * 24 } // one day
 }))
 
 const passport = require('passport')
