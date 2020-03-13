@@ -39,6 +39,9 @@ router.get('/', (req, res) => {
         record.icon = iconHTML[record.category]
       })
 
+      // res.locals
+      res.locals.indexHandlebars = true
+
       return res.render('index', { records, totalAmount, category, months, month })
     })
     .catch(err => {
